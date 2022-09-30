@@ -10,6 +10,8 @@ router.patch("/:id", errorHandler(recruitmentController.updateRecruitment));
 
 router.delete("/:id", errorHandler(recruitmentController.deleteRecruitment));
 
+router.get("/", errorHandler(recruitmentController.getRecruitment));
+
 module.exports = {
   router,
 };
