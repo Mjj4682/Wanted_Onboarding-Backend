@@ -101,7 +101,7 @@ const getRecruitment = async (searchWord) => {
     //     },
     //   ],
     // });
-    // orm방식이 안 예쁜거 같아서 raw 쿼리 사용했습니다.
+    // orm방식이 안 예쁜거 같아서 raw 쿼리를 사용했습니다. 비교를 위해 일부로 지우지 않았습니다.
     const recruitmentList = await sequelize.query(
       `
     SELECT 
@@ -136,9 +136,53 @@ const getRecruitment = async (searchWord) => {
   }
 };
 
+const getDetailRecruitment = async (recruitmentId) => {
+  const companyId = await Recruitment.findAll({
+    attributes: ["company_id"],
+    raw: true,
+    where: { id: recruitmentId },
+  });
+  if (companyId.length === 0) {
+    throw new error("id does not exist", 400);
+  }
+  try {
+    const recruitmentList = await sequelize.query(
+      `
+    SELECT 
+      recruitment.id,
+      company.name AS companyName,
+      country.name AS countryName,
+      region.name AS regionName,
+      position,
+      compensation,
+      stack.name AS stackName,
+      contents,
+      (SELECT 
+        JSON_ARRAYAGG(id) 
+      FROM recruitment 
+      WHERE company_id = ${companyId[0].company_id}) 
+      AS idList
+    FROM recruitment
+    INNER JOIN company ON company_id = company.id
+    INNER JOIN region ON region_id = region.id
+    INNER JOIN country ON country_id = country.id
+    INNER JOIN stack ON stack_id = stack.id
+    WHERE recruitment.id = ${recruitmentId}`,
+      {
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    return recruitmentList;
+  } catch (err) {
+    console.log(err);
+    throw new error("INVALID_DATA_INPUT", 500);
+  }
+};
+
 module.exports = {
   registerRecruitment,
   updateRecruitment,
   deleteRecruitment,
   getRecruitment,
+  getDetailRecruitment,
 };
