@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.post("/", errorHandler(recruitmentController.registerRecruitment));
 
+router.patch("/:id", errorHandler(recruitmentController.updateRecruitment));
+
 module.exports = {
   router,
 };
