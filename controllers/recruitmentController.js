@@ -38,8 +38,18 @@ const deleteRecruitment = async (req, res) => {
   res.status(204).json({});
 };
 
+const getRecruitment = async (req, res) => {
+  let searchWord = req.query.search;
+  if (!searchWord) {
+    searchWord = ".";
+  }
+  const recruitmentList = await recruitmentService.getRecruitment(searchWord);
+  res.status(200).json({ recruitmentList });
+};
+
 module.exports = {
   registerRecruitment,
   updateRecruitment,
   deleteRecruitment,
+  getRecruitment,
 };
