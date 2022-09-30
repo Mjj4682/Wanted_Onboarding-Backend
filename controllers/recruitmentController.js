@@ -13,9 +13,26 @@ const registerRecruitment = async (req, res) => {
     contents,
     stackId
   );
-  res.status(200).json({ message: "register success" });
+  res.status(201).json({ message: "register success" });
+};
+
+const updateRecruitment = async (req, res) => {
+  const recruitmentId = req.params.id;
+  const { position, compensation, contents, stackId } = req.body;
+  if (!recruitmentId || !position || !contents || !stackId) {
+    throw new error("empty required value", 400);
+  }
+  await recruitmentService.updateRecruitment(
+    recruitmentId,
+    position,
+    compensation,
+    contents,
+    stackId
+  );
+  res.status(200).json({ message: "update success" });
 };
 
 module.exports = {
   registerRecruitment,
+  updateRecruitment,
 };
