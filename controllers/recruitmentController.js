@@ -47,9 +47,18 @@ const getRecruitment = async (req, res) => {
   res.status(200).json({ recruitmentList });
 };
 
+const getDetailRecruitment = async (req, res) => {
+  const recruitmentId = req.params.id;
+  const detailRecruitment = await recruitmentService.getDetailRecruitment(
+    recruitmentId
+  );
+  res.status(200).json({ detailRecruitment: detailRecruitment[0] });
+};
+
 module.exports = {
   registerRecruitment,
   updateRecruitment,
   deleteRecruitment,
   getRecruitment,
+  getDetailRecruitment,
 };

@@ -12,6 +12,8 @@ router.delete("/:id", errorHandler(recruitmentController.deleteRecruitment));
 
 router.get("/", errorHandler(recruitmentController.getRecruitment));
 
+router.get("/:id", errorHandler(recruitmentController.getDetailRecruitment));
+
 module.exports = {
   router,
 };
