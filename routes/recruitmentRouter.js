@@ -8,6 +8,8 @@ router.post("/", errorHandler(recruitmentController.registerRecruitment));
 
 router.patch("/:id", errorHandler(recruitmentController.updateRecruitment));
 
+router.delete("/:id", errorHandler(recruitmentController.deleteRecruitment));
+
 module.exports = {
   router,
 };

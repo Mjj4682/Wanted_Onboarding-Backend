@@ -32,7 +32,14 @@ const updateRecruitment = async (req, res) => {
   res.status(200).json({ message: "update success" });
 };
 
+const deleteRecruitment = async (req, res) => {
+  const recruitmentId = req.params.id;
+  await recruitmentService.deleteRecruitment(recruitmentId);
+  res.status(204).json({});
+};
+
 module.exports = {
   registerRecruitment,
   updateRecruitment,
+  deleteRecruitment,
 };

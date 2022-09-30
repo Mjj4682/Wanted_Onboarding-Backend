@@ -52,7 +52,23 @@ const updateRecruitment = async (
   }
 };
 
+const deleteRecruitment = async (recruitmentId) => {
+  const checkRecruitmentId = await Recruitment.count({
+    where: { id: recruitmentId },
+  });
+  if (checkRecruitmentId === 0) {
+    throw new error("id does not exist", 400);
+  }
+  try {
+    await Recruitment.destroy({ where: { id: recruitmentId } });
+  } catch (err) {
+    console.log(err);
+    throw new error("INVALID_DATA_INPUT", 500);
+  }
+};
+
 module.exports = {
   registerRecruitment,
   updateRecruitment,
+  deleteRecruitment,
 };
