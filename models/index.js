@@ -118,4 +118,6 @@ db.Application.belongsTo(db.Recruitment, {
   foreignKey: "recruitment_id",
 });
 
+sequelize.sync({ alter: true });
+
 module.exports = db;
