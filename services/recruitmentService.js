@@ -25,7 +25,6 @@ const registerRecruitment = async (
       stack_id: stackId,
     });
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };
@@ -54,7 +53,6 @@ const updateRecruitment = async (
       { where: { id: recruitmentId } }
     );
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };
@@ -69,7 +67,6 @@ const deleteRecruitment = async (recruitmentId) => {
   try {
     await Recruitment.destroy({ where: { id: recruitmentId } });
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };
@@ -131,7 +128,6 @@ const getRecruitment = async (searchWord) => {
     );
     return recruitmentList;
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };
@@ -174,7 +170,6 @@ const getDetailRecruitment = async (recruitmentId) => {
     );
     return recruitmentList;
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };

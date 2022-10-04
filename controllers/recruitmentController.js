@@ -19,9 +19,6 @@ const registerRecruitment = async (req, res) => {
 const updateRecruitment = async (req, res) => {
   const recruitmentId = req.params.id;
   const { position, compensation, contents, stackId } = req.body;
-  if (!recruitmentId || !position || !contents || !stackId) {
-    throw new error("empty required value", 400);
-  }
   await recruitmentService.updateRecruitment(
     recruitmentId,
     position,
