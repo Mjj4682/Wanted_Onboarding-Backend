@@ -1,8 +1,20 @@
 const error = require("../middlewares/errorConstructor");
 
-const { Application } = require("../models");
+const { Application, Recruitment, User } = require("../models");
 
 const applyApplication = async (recruitmentId, userId) => {
+  const checkRecruitmentId = await Recruitment.count({
+    where: { id: recruitmentId },
+  });
+  if (checkRecruitmentId === 0) {
+    throw new error("recruitmentId does not exist", 400);
+  }
+  const checkUserId = await User.count({
+    where: { id: userId },
+  });
+  if (checkUserId === 0) {
+    throw new error("userId does not exist", 400);
+  }
   const checkApplicationList = await Application.count({
     where: { recruitment_id: recruitmentId, user_id: userId },
   });
@@ -15,7 +27,6 @@ const applyApplication = async (recruitmentId, userId) => {
       user_id: userId,
     });
   } catch (err) {
-    console.log(err);
     throw new error("INVALID_DATA_INPUT", 500);
   }
 };
