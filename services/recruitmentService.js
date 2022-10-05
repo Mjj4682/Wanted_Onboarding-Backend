@@ -1,13 +1,6 @@
 const error = require("../middlewares/errorConstructor");
 
-const {
-  Recruitment,
-  sequelize,
-  Stack,
-  Company,
-  Country,
-  Region,
-} = require("../models");
+const { Recruitment, sequelize } = require("../models");
 
 const registerRecruitment = async (
   companyId,
@@ -73,32 +66,6 @@ const deleteRecruitment = async (recruitmentId) => {
 
 const getRecruitment = async (searchWord) => {
   try {
-    // const recruitmentList = await Recruitment.findAll({
-    //   attributes: ["id", "position", "compensation"],
-    //   include: [
-    //     {
-    //       model: Stack,
-    //       attributes: ["name"],
-    //     },
-    //     {
-    //       model: Company,
-    //       attributes: ["name"],
-    //       include: [
-    //         {
-    //           model: Region,
-    //           attributes: ["name"],
-    //           include: [
-    //             {
-    //               model: Country,
-    //               attributes: ["name"],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // });
-    // orm방식이 안 예쁜거 같아서 raw 쿼리를 사용했습니다. 비교를 위해 일부로 지우지 않았습니다.
     const recruitmentList = await sequelize.query(
       `
     SELECT 
