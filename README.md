@@ -1,4 +1,4 @@
-# wanted_pre_onboarding
+# wanted-pre-onboarding-backend
 
 > 개발 기간 : 2022년 09월 30일 ~ 10월 04일 (5일)
 
