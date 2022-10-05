@@ -20,7 +20,7 @@
 
 ## API Documentation
 
-[JJ_Wanted (Postman)](https://documenter.getpostman.com/view/22699914/2s83zcS6u3)
+- [JJ_Wanted (Postman)](https://documenter.getpostman.com/view/22699914/2s83zcS6u3)
 
 ## 요구사항 분석 및 구현 과정
 
